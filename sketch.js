@@ -49,8 +49,11 @@ function preload(){
   plataforma = loadImage("imagensfase1/plataforma.png");
   bullba = loadImage("imagensfase1/bullba.png");
   venusaur = loadImage("imagensfase1/venusaur.png");
-  personagem = loadImage("personagem/rick-parado.png");
+  CHARIMG = loadImage(CHAR_IDLE_IMG_PATH);
+
+
 }
+
 
 function setup() {
   
@@ -117,7 +120,6 @@ function draw() {
   if(tela == 1){//INICIO JOGAR 1
     
     drawfase1()
-    
     
    }//FIM JOGAR 1
   if(tela == 2){//INICIO TELA 2

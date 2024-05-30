@@ -2,30 +2,54 @@ const falling = "falling";
 const jumping = "jumping";
 const idle = "idle";
 
+const CHAR_IDLE_IMG_PATH = "personagem/rickdireita.png";
+var CHARIMG;
+
+const CHATSPRITEPATH = "personagem/rickdireita2.png";
+var spriteSheet;
+let charAnimation;
+
+let baseSpeed = 3;
+var speed = baseSpeed;
+var charSpeed = 5;
+
 var state = idle;
 var charX = 30;
 var chaoY = 580;
 var charY = chaoY;
-var charSpeed = 5;
 var jumpSpeed = 5;
 var fallingSpeed = 5;
 var jMax = 150;
 
 var personagem;
 
+const CHAR_WIDTH = 50;
+const CHAR_HEIGHT = 50;
 
 function drawCharacter() {
-  image(personagem, charX, charY, 50, 50);
+  push();
+  if (speed < 0) {
+    scale(-1, 1);
+    image(CHARIMG, -(charX + CHAR_WIDTH), charY, CHAR_WIDTH, CHAR_HEIGHT);
+  } else {
+    image(CHARIMG, charX, charY, CHAR_WIDTH, CHAR_HEIGHT);
+  }
+  pop();
+  
   jump();
   moveCharacter();
 }
 
+
+
 function moveCharacter() {
   if (keyIsDown(68)) { // tecla 'D'
     charX += charSpeed;
+    speed = baseSpeed;
   }
   if (keyIsDown(65)) { // tecla 'A'
     charX -= charSpeed;
+    speed = -baseSpeed;
   }
 }
 
@@ -42,25 +66,23 @@ function keyPressed() {
 }
 
 function jump() {
-
   if (state === jumping) {
-      charY -= jumpSpeed
-      }
+    charY -= jumpSpeed;
+  }
   
   if(state == idle && charY <= 470){
-   chaoY = charY
- }
+    chaoY = charY;
+  }
   
   if(Math.abs(charY - chaoY) >= jMax) {
-      state = falling
-    }
+    state = falling;
+  }
 
   if(state === falling) {
-    charY += fallingSpeed
+    charY += fallingSpeed;
   }
 
   if(charY == chaoY) {
-    state = idle
+    state = idle;
   }
-
 }
